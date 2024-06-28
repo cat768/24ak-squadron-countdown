@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>War Thunder Squadron Points Countdown for =24AK=</title>
     <style>
+        :root {
+            --bg-color: #f0f0f0;
+            --text-color: #333;
+            --container-bg: white;
+            --container-shadow: rgba(0,0,0,0.1);
+        }
+        
+        [data-theme="dark"] {
+            --bg-color: #222;
+            --text-color: #f0f0f0;
+            --container-bg: #333;
+            --container-shadow: rgba(255,255,255,0.1);
+        }
+
         body {
             font-family: Arial, sans-serif;
             display: flex;
@@ -13,18 +27,21 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            background-color: #f0f0f0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             padding: 20px;
+            transition: background-color 0.3s, color 0.3s;
         }
         .container {
             text-align: center;
-            background-color: white;
+            background-color: var(--container-bg);
             padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 10px var(--container-shadow);
             margin-bottom: 20px;
             max-width: 600px;
             width: 100%;
+            transition: background-color 0.3s, box-shadow 0.3s;
         }
         #countdown {
             font-size: 2rem;
@@ -33,7 +50,7 @@
         }
         #nextReset, #userTimeZone {
             font-size: 1rem;
-            color: #666;
+            opacity: 0.8;
         }
         .squadron-info {
             text-align: left;
@@ -52,9 +69,25 @@
             height: 24px;
             margin-right: 10px;
         }
+        #theme-select {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 5px;
+            border-radius: 5px;
+            background-color: var(--container-bg);
+            color: var(--text-color);
+            border: 1px solid var(--text-color);
+        }
     </style>
 </head>
 <body>
+    <select id="theme-select">
+        <option value="auto">Auto</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+    </select>
+
     <div class="container">
         <h1>War Thunder Squadron Points Reset</h1>
         <h2>Squadron: =24AK=</h2>
@@ -78,14 +111,9 @@
     <script>
         function updateCountdown() {
             const now = new Date();
-            
-            // Set the initial reset time (June 29, 2024 9:29 Adelaide time)
             const adelaideTime = new Date('2024-06-29T09:29:00+09:30');
-            
-            // Convert Adelaide time to UTC
             const initialResetUTC = new Date(adelaideTime.toUTCString());
             
-            // Calculate the next reset time
             while (initialResetUTC <= now) {
                 initialResetUTC.setUTCDate(initialResetUTC.getUTCDate() + 3);
             }
@@ -99,17 +127,45 @@
             
             document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
             
-            // Display next reset time in user's local time
             const nextResetLocal = initialResetUTC.toLocaleString();
             document.getElementById('nextReset').innerHTML = `Next reset: ${nextResetLocal}`;
             
-            // Display user's time zone
             const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
             document.getElementById('userTimeZone').innerHTML = `Your time zone: ${timeZone}`;
         }
 
+        function setTheme(theme) {
+            if (theme === 'auto') {
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                }
+            } else {
+                document.documentElement.setAttribute('data-theme', theme);
+            }
+            localStorage.setItem('theme', theme);
+        }
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'auto';
+            setTheme(savedTheme);
+            document.getElementById('theme-select').value = savedTheme;
+        }
+
+        document.getElementById('theme-select').addEventListener('change', (e) => {
+            setTheme(e.target.value);
+        });
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (localStorage.getItem('theme') === 'auto') {
+                setTheme('auto');
+            }
+        });
+
+        initTheme();
         setInterval(updateCountdown, 1000);
-        updateCountdown(); // Initial call to avoid delay
+        updateCountdown();
     </script>
 </body>
 </html>
