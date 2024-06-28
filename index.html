@@ -77,11 +77,13 @@
             width: 24px;
             height: 24px;
             margin-right: 10px;
-            filter: invert(0); /* Ensures the icon is visible in light mode */
             transition: filter 0.3s;
         }
-        [data-theme="dark"] .link-logo {
-            filter: invert(1); /* Inverts the icon color for better visibility in dark mode */
+        .wt-logo {
+            filter: none; /* Ensure the War Thunder icon is not inverted */
+        }
+        [data-theme="dark"] .link-logo:not(.wt-logo) {
+            filter: invert(1); /* Inverts the icon color for better visibility in dark mode, except for War Thunder icon */
         }
         #theme-select {
             position: absolute;
@@ -150,7 +152,7 @@
         <p>46AK, 24AK, 47AK squadrons</p>
         <p>Joining our Discord is mandatory for membership.</p>
         <div class="link">
-            <img src="https://wiki.warthunder.com/images/f/f8/Icons_War_Thunder.png" alt="Squadron Profile logo" class="link-logo profile-logo">
+            <img src="https://wiki.warthunder.com/images/f/f8/Icons_War_Thunder.png" alt="Squadron Profile logo" class="link-logo wt-logo">
             <a href="https://warthunder.com/en/community/claninfo/XXIVAK%20mot-2PzGr" target="_blank">Squadron Profile</a>
         </div>
         <div class="link">
