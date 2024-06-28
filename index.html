@@ -121,6 +121,11 @@
             box-shadow: 0 0 5px var(--container-shadow);
             transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
         }
+        #latest-commit a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
     </style>
 </head>
 <body>
@@ -160,8 +165,9 @@
                 const latestCommit = commits[0];
                 const commitMessage = latestCommit.commit.message;
                 const commitSha = latestCommit.sha.substring(0, 7);
+                const commitUrl = latestCommit.html_url;
                 const commitDate = new Date(latestCommit.commit.author.date).toLocaleString();
-                document.getElementById('latest-commit').innerHTML = `Latest commit: ${commitMessage} (${commitSha}) on ${commitDate}`;
+                document.getElementById('latest-commit').innerHTML = `Latest commit: <a href="${commitUrl}" target="_blank">${commitMessage} (${commitSha})</a> on ${commitDate}`;
             } catch (error) {
                 document.getElementById('latest-commit').innerHTML = 'Failed to load latest commit';
             }
