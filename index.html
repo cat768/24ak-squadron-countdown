@@ -10,6 +10,7 @@
             --text-color: #333;
             --container-bg: white;
             --container-shadow: rgba(0,0,0,0.1);
+            --link-color: #5865F2;
         }
         
         [data-theme="dark"] {
@@ -17,6 +18,7 @@
             --text-color: #f0f0f0;
             --container-bg: #333;
             --container-shadow: rgba(255,255,255,0.1);
+            --link-color: #7289da; /* Discord brand color for better visibility in dark mode */
         }
 
         body {
@@ -63,11 +65,18 @@
             align-items: center;
             justify-content: flex-start;
             margin-top: 10px;
+            color: var(--link-color);
+            transition: color 0.3s;
         }
         .discord-logo {
             width: 24px;
             height: 24px;
             margin-right: 10px;
+            filter: invert(0); /* Ensures the icon is visible in light mode */
+            transition: filter 0.3s;
+        }
+        [data-theme="dark"] .discord-logo {
+            filter: invert(1); /* Inverts the icon color for better visibility in dark mode */
         }
         #theme-select {
             position: absolute;
