@@ -93,16 +93,20 @@
             color: var(--text-color);
             border: 1px solid var(--text-color);
         }
-        #theme-select option[value="auto"]::before {
+        #theme-select option.auto::before {
             content: "\1F310"; /* Globe icon */
             margin-right: 8px;
         }
-        #theme-select option[value="light"]::before {
+        #theme-select option.light::before {
             content: "\2600"; /* Sun icon */
             margin-right: 8px;
         }
-        #theme-select option[value="dark"]::before {
+        #theme-select option.dark::before {
             content: "\1F319"; /* Crescent moon icon */
+            margin-right: 8px;
+        }
+        #theme-select option::before {
+            content: attr(data-icon) ' ';
             margin-right: 8px;
         }
         #latest-commit {
@@ -121,9 +125,9 @@
 </head>
 <body>
     <select id="theme-select">
-        <option value="auto">Auto</option>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
+        <option class="auto" value="auto" data-icon="🌐">Auto</option>
+        <option class="light" value="light" data-icon="☀️">Light</option>
+        <option class="dark" value="dark" data-icon="🌙">Dark</option>
     </select>
 
     <div class="container">
