@@ -8,11 +8,13 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
+            padding: 20px;
         }
         .container {
             text-align: center;
@@ -20,6 +22,9 @@
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            max-width: 600px;
+            width: 100%;
         }
         #countdown {
             font-size: 2rem;
@@ -29,6 +34,23 @@
         #nextReset, #userTimeZone {
             font-size: 1rem;
             color: #666;
+        }
+        .squadron-info {
+            text-align: left;
+        }
+        .squadron-info h3 {
+            margin-top: 0;
+        }
+        .discord-link {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-top: 10px;
+        }
+        .discord-logo {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -40,6 +62,17 @@
         <p>Time until next reset</p>
         <div id="nextReset"></div>
         <div id="userTimeZone"></div>
+    </div>
+    
+    <div class="container squadron-info">
+        <h3>Motto: "Klotzen, nicht kleckern" -Heinz Guderian</h3>
+        <p>2.Panzergruppe- historically most accurate German bias house in WT</p>
+        <p>46AK, 24AK, 47AK squadrons</p>
+        <p>Joining our Discord is mandatory for membership.</p>
+        <div class="discord-link">
+            <img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/3.0.1/discord.svg" alt="Discord logo" class="discord-logo">
+            <a href="https://discord.gg/zDGsGHRFmp" target="_blank">Join our Discord</a>
+        </div>
     </div>
 
     <script>
