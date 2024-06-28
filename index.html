@@ -93,6 +93,18 @@
             color: var(--text-color);
             border: 1px solid var(--text-color);
         }
+        #theme-select option[value="auto"]::before {
+            content: "\1F310"; /* Globe icon */
+            margin-right: 8px;
+        }
+        #theme-select option[value="light"]::before {
+            content: "\2600"; /* Sun icon */
+            margin-right: 8px;
+        }
+        #theme-select option[value="dark"]::before {
+            content: "\1F319"; /* Crescent moon icon */
+            margin-right: 8px;
+        }
         #latest-commit {
             position: fixed;
             bottom: 10px;
