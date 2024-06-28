@@ -60,7 +60,7 @@
         .squadron-info h3 {
             margin-top: 0;
         }
-        .discord-link {
+        .link {
             display: flex;
             align-items: center;
             justify-content: flex-start;
@@ -68,19 +68,19 @@
             color: var(--link-color);
             transition: color 0.3s;
         }
-        .discord-link a {
+        .link a {
             color: var(--link-color);
             text-decoration: none;
             transition: color 0.3s;
         }
-        .discord-logo {
+        .link-logo {
             width: 24px;
             height: 24px;
             margin-right: 10px;
             filter: invert(0); /* Ensures the icon is visible in light mode */
             transition: filter 0.3s;
         }
-        [data-theme="dark"] .discord-logo {
+        [data-theme="dark"] .link-logo {
             filter: invert(1); /* Inverts the icon color for better visibility in dark mode */
         }
         #theme-select {
@@ -149,9 +149,13 @@
         <p>2.Panzergruppe- historically most accurate German bias house in WT</p>
         <p>46AK, 24AK, 47AK squadrons</p>
         <p>Joining our Discord is mandatory for membership.</p>
-        <div class="discord-link">
-            <img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/3.0.1/discord.svg" alt="Discord logo" class="discord-logo">
+        <div class="link">
+            <img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/3.0.1/discord.svg" alt="Discord logo" class="link-logo discord-logo">
             <a href="https://discord.gg/zDGsGHRFmp" target="_blank">Join our Discord</a>
+        </div>
+        <div class="link">
+            <img src="https://cdnjs.cloudflare.com/ajax/libs/simple-icons/3.0.1/github.svg" alt="GitHub logo" class="link-logo github-logo">
+            <a href="https://github.com/cat768/24ak-squadron-countdown" target="_blank">GitHub</a>
         </div>
     </div>
 
