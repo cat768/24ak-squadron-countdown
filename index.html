@@ -183,30 +183,30 @@
             }
         }
 
-        function updateCountdown() {
-            const now = new Date();
-            const adelaideTime = new Date('2024-06-29T09:29:00+09:30');
-            let initialResetUTC = new Date(adelaideTime.toUTCString());
-            
-            while (initialResetUTC <= now) {
-                initialResetUTC.setUTCDate(initialResetUTC.getUTCDate() + 3);
-            }
-            
-            const timeLeft = initialResetUTC - now;
-            
-            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-            
-            document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-            
-            const nextResetLocal = initialResetUTC.toLocaleString();
-            document.getElementById('nextReset').innerHTML = `Next reset: ${nextResetLocal}`;
-            
-            const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            document.getElementById('userTimeZone').innerHTML = `Your time zone: ${timeZone}`;
+    function updateCountdown() {
+        const now = new Date();
+        const adelaideTime = new Date('2024-06-29T09:30:00Z'); // Set the time in GMT
+
+        while (adelaideTime <= now) {
+            adelaideTime.setUTCDate(adelaideTime.getUTCDate() + 3); // Increment by 3 days for the reset interval
         }
+
+        const timeLeft = adelaideTime - now;
+
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+        const nextResetLocal = adelaideTime.toLocaleString(); // Convert GMT to local time
+        document.getElementById('nextReset').innerHTML = `Next reset: ${nextResetLocal}`;
+
+        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        document.getElementById('userTimeZone').innerHTML = `Your time zone: ${timeZone}`;
+    }
+
 
         function setTheme(theme) {
             if (theme === 'auto') {
